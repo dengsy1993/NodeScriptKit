@@ -1,9 +1,0 @@
-[scripts]
-# 先在这里定义脚本命令
-bbr_install_cmd = "bash /etc/nsk/shell_scripts/custom/bbr_tune.sh"
-
-[[menus]]
-# 这里的 id 必须和 000-menu.toml 里的子菜单名称一致
-id = "tcp_tune"
-title = "BBR 网络加速优化"
-script = "bbr_install_cmd"
