@@ -1,17 +1,17 @@
 [scripts]
 # 1. 定义你的脚本路径
-bbr_tune_cmd = "bash /etc/nsk/shell_scripts/custom/bbr_tune.sh"
+bbr_tune = "bash /etc/nsk/shell_scripts/custom/bbr_tune.sh"
 
 [[menus]]
 # 2. 这里的 id 必须和 000-menu.toml 里的名字完全一致
 id = "custom_tools"
 title = "自用工具"
 sub_menus = [
-    "bbr_tune_item", # 以后想加新脚本，就在这里往下排队
+    "bbr_tune", # 以后想加新脚本，就在这里往下排队
 ]
 
 [[menus]]
 # 3. 具体的功能按钮
 id = "bbr_tune_item"
 title = "BBR 网络加速优化"
-script = "bbr_tune_cmd"
+script = "bbr_tune"
