@@ -1,14 +1,92 @@
+# 🛠️ NodeScriptKit (个人自用版)
+
+本项目基于开源项目 [NodeScriptKit](https://github.com/NodeSeekDev/NodeScriptKit) 自行定制。
+
+## 🚀 极速安装指南
+
+一键安装脚本：
+
+```bash
+bash <(curl -Ls nsk-dengsy1993.qqvps.eu.org)
+```
+安装完成后，以后随时在终端输入 `nsk` 或 `n` 即可快速唤出工具箱。
+
+## ✨ 新增功能
+
+### 20260423更新
+BBR 网络加速优化
+集成了一键 TCP 调优工具，运行后会自动配置系统环境，之后支持直接在终端使用 bbr 指令唤出优化面板。
+
+位置：主菜单 -> 实用工具 -> BBR 网络加速优化
+
+致谢：核心脚本源自 [Eric86777/vps-tcp-tune](https://github.com/Eric86777/vps-tcp-tune)
+
+安装后只需输入 `bbr` 即可运行
+
+## 📖 DIY 教程：如何增加自己的脚本？
+这个工具箱最大的魅力在于你可以像搭积木一样不断往里塞东西。只需三步：
+
+### 第一步：上传脚本文件
+将你的 `.sh` 脚本上传到仓库的 `shell_scripts/custom/` 文件夹下。
+
+记下它的路径，例如：`shell_scripts/custom/my_test.sh`。
+
+### 第二步：修改菜单配置 (TOML)
+进入 `modules.d/` 目录。
+
+建议直接修改 `090-utility_tools.toml`（实用工具菜单）。
+
+定义脚本：在 `[scripts]` 下方加一行：
+`my_cmd = "bash /etc/nsk/shell_scripts/custom/my_test.sh"`
+
+挂载按钮：在 `sub_menus` 列表里加上 `'my_btn_id'`。
+
+定义按钮：在文件末尾加一个块：
+
+```Ini, TOML
+
+[[menus]]
+id = "my_btn_id"
+title = "我的新脚本名字"
+script = "my_cmd"
+```
+
+### 第三步：强制同步到 VPS
+修改完 GitHub 后，在 VPS 上运行以下命令强制拉取最新版本（带时间戳可跳过 GitHub 缓存）：
+
+```bash
+bash <(curl -Ls "[https://raw.githubusercontent.com/dengsy1993/NodeScriptKit/main/install.sh?t=$](https://raw.githubusercontent.com/dengsy1993/NodeScriptKit/main/install.sh?t=$)(date +%s)")
+```
+
+上面两处 `dengsy1993`可改成你自己的
+
+## ⚙️ 架构与底层说明
+NodeScriptKit 是一个社区驱动的、交互式的服务器辅助脚本汇总集合。
+
+核心目录映射
+主程序：`/usr/bin/nsk` (链接自 `nsk.sh`)
+
+核心引擎：`/usr/bin/nskCore`
+
+主配置：`/etc/nsk/config.toml`
+
+菜单定义：`/etc/nsk/modules.d/default/*.toml`
+
+脚本存放：`/etc/nsk/shell_scripts/`
+
+配置文件逻辑
+合并机制：系统会对所有 `.toml` 文件进行逻辑合并，而非简单的文本拼接。
+
+ID 穿针引线：`id` 负责关联菜单层级，`script` 负责最终落地到具体的 `Shell` 命令。
+
+
+# 下面为原项目介绍
 # NodeScriptKit
 NodeScriptKit项目，简称nsk项目。它是
 - 一个社区驱动的，命令小抄项目
 - 一个可自由扩展配置，支持订阅，交互式的，服务器辅助脚本汇总集合
 - 一个能够节省你大量命令/脚本查找时间的项目
 
-## 使用方法
-
-```
-bash <(curl -sL https://sh.nodeseek.com)
-```
 
 ![screenshot](./img/screenshot1.png)
 
@@ -113,5 +191,6 @@ script = "test1"
 - 脚本尽量使用交互式调用
 
 ## 社区公约&开发指南
+- [原项目地址](https://github.com/NodeSeekDev/NodeScriptKit)
 - [社区公约](./Development.md)
 - [开发指南](./Rules.md)
