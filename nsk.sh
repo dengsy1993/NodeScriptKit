@@ -1,15 +1,3 @@
 #!/bin/bash
-MENU_URL="$(curl -Ls -o /dev/null -w %{url_effective} https://github.com/dengsy1993/NodeScriptKit/releases/latest)"
-MENU_VERSION="${MENU_URL##*/}"
-if [ -n "$MENU_VERSION" ] && \
-    [ "$MENU_VERSION" != latest ] && \
-    [ "$MENU_VERSION" != "$(cat /etc/nsk/version)" ] ; then
-    echo "检测到有新版本可以更新，是否升级？[y/N]"
-    read -r ans
-    if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-        bash <(curl -Ls https://raw.githubusercontent.com/dengsy1993/NodeScriptKit/refs/heads/main/install.sh) && exit
-    else
-        echo "已取消升级"
-    fi
-fi
+# 删除了烦人的升级检查，直接运行核心
 nskCore -config /etc/nsk/config.toml
