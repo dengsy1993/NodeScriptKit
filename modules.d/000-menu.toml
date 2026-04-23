@@ -10,4 +10,5 @@ sub_menus = [
     "security_tools", #安全工具
     "app_deployment", #应用部署
     "utility_tools", #其他实用工具
+    "tcp_tune_tools", #VPS调参
 ]
