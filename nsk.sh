@@ -1,5 +1,5 @@
 #!/bin/bash
-MENU_URL="$(curl -Ls -o /dev/null -w %{url_effective} https://github.com/NodeSeekDev/NodeScriptKit/releases/latest)"
+MENU_URL="$(curl -Ls -o /dev/null -w %{url_effective} https://github.com/dengsy1993/NodeScriptKit/releases/latest)"
 MENU_VERSION="${MENU_URL##*/}"
 if [ -n "$MENU_VERSION" ] && \
     [ "$MENU_VERSION" != latest ] && \
@@ -7,7 +7,7 @@ if [ -n "$MENU_VERSION" ] && \
     echo "检测到有新版本可以更新，是否升级？[y/N]"
     read -r ans
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-        bash <(curl -Ls https://raw.githubusercontent.com/NodeSeekDev/NodeScriptKit/refs/heads/main/install.sh) && exit
+        bash <(curl -Ls https://raw.githubusercontent.com/dengsy1993/NodeScriptKit/refs/heads/main/install.sh) && exit
     else
         echo "已取消升级"
     fi
