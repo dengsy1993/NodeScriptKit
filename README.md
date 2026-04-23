@@ -17,42 +17,36 @@ bash <(curl -Ls nsk-dengsy1993.qqvps.eu.org)
 BBR 网络加速优化
 集成了一键 TCP 调优工具，运行后会自动配置系统环境，之后支持直接在终端使用 bbr 指令唤出优化面板。
 
-位置：主菜单 -> 实用工具 -> BBR 网络加速优化
+位置：`主菜单` -> `自用工具` -> `BBR 网络加速优化`
 
 致谢：核心脚本源自 [Eric86777/vps-tcp-tune](https://github.com/Eric86777/vps-tcp-tune)
 
 安装后只需输入 `bbr` 即可运行
 
-## 📖 DIY 教程：如何增加自己的脚本？
-这个工具箱最大的魅力在于你可以像搭积木一样不断往里塞东西。只需三步：
+## 📖 DIY 教程：如何增加自己的新脚本？
+
+以后你遇到任何好用的脚本，只需三步就能把它装进你的专属菜单里，就像搭积木一样简单且不会和原版冲突：
 
 ### 第一步：上传脚本文件
-将你的 `.sh` 脚本上传到仓库的 `shell_scripts/custom/` 文件夹下。
+1. 将你的 `.sh` 脚本上传到仓库的 `shell_scripts/custom/` 文件夹下。
+2. 记下它的路径，例如：`shell_scripts/custom/my_test.sh`。
 
-记下它的路径，例如：`shell_scripts/custom/my_test.sh`。
+### 第二步：修改“自用”菜单配置
+1. 进入 `modules.d/` 目录，打开你的专属配置文件 **`110-custom_tools.toml`**。
+2. **定义脚本别名**：在顶部的 `[scripts]` 区域下方加一行：
+   `my_script_cmd = "bash /etc/nsk/shell_scripts/custom/my_test.sh"`
+3. **把按钮加入列表**：在第一个 `[[menus]]` (id = "custom_tools") 的 `sub_menus` 列表里，加上你的按钮 ID，比如 `'my_btn_item'`。
+4. **设计按钮外观**：在文件最末尾，新增一个菜单块：
+   ```toml
+   [[menus]]
+   id = "my_btn_item"
+   title = "我的新脚本名字"
+   script = "my_script_cmd"
 
-### 第二步：修改菜单配置 (TOML)
-进入 `modules.d/` 目录。
+(💡 防报错小贴士：菜单 ID 和脚本 Key 最好使用不同的后缀以防重名，例如按钮用 `_item`，命令用 `_cmd`。)
 
-建议直接修改 `090-utility_tools.toml`（实用工具菜单）。
-
-定义脚本：在 `[scripts]` 下方加一行：
-`my_cmd = "bash /etc/nsk/shell_scripts/custom/my_test.sh"`
-
-挂载按钮：在 `sub_menus` 列表里加上 `'my_btn_id'`。
-
-定义按钮：在文件末尾加一个块：
-
-```Ini, TOML
-
-[[menus]]
-id = "my_btn_id"
-title = "我的新脚本名字"
-script = "my_cmd"
-```
-
-### 第三步：强制同步到 VPS
-修改完 GitHub 后，在 VPS 上运行以下命令强制拉取最新版本（带时间戳可跳过 GitHub 缓存）：
+### 第三步：在 VPS 上强制同步
+修改完 GitHub 后，登录你的 VPS，运行一次带时间戳的安装命令即可强制覆盖旧菜单：
 
 ```bash
 bash <(curl -Ls "[https://raw.githubusercontent.com/dengsy1993/NodeScriptKit/main/install.sh?t=$](https://raw.githubusercontent.com/dengsy1993/NodeScriptKit/main/install.sh?t=$)(date +%s)")
