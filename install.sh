@@ -1,5 +1,5 @@
 #!/bin/bash
-# 功能: NodeScriptKit 安装和更新脚本 (个人定制终极修复版)
+# 功能: NodeScriptKit 安装和更新脚本 (个人定制绝对不连行版)
 
 goos=$(uname -s | tr '[:upper:]' '[:lower:]')
 goarch=$(uname -m)                        
@@ -57,8 +57,11 @@ curl -sLo - "https://github.com/dengsy1993/NodeScriptKit/archive/refs/heads/main
 # 复制基础配置文件
 [ -f "/etc/nsk/config.toml" ] || cp $temp_dir/*/menu.toml /etc/nsk/config.toml
 
-# 【修复点】：正确的换行，先清理，再复制，强制复制所有子目录
-rm -rf /etc/nsk/modules.d/default/* cp -r $temp_dir/*/modules.d/* /etc/nsk/modules.d/default/
+# ==========================================
+# 【绝对不能出错的修复点】：分开执行，确保菜单被复制
+rm -rf /etc/nsk/modules.d/default/*
+cp -r $temp_dir/*/modules.d/* /etc/nsk/modules.d/default/
+# ==========================================
 
 # 复制你写的脚本文件
 cp -r $temp_dir/*/shell_scripts/* /etc/nsk/shell_scripts/
