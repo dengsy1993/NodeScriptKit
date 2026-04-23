@@ -55,7 +55,7 @@ curl -sLo - "https://github.com/dengsy1993/NodeScriptKit/archive/refs/heads/main
     tar -xzv -C $temp_dir
 
 # 复制基础配置文件
-[ -f "/etc/nsk/config.toml" ] || cp $temp_dir/*/menu.toml /etc/nsk/config.toml
+[ -f "/etc/nsk/config.toml" ] || cp -f $temp_dir/*/menu.toml /etc/nsk/config.toml
 
 # ==========================================
 # 【绝对不能出错的修复点】：分开执行，确保菜单被复制
