@@ -1,0 +1,4 @@
+[[menu]]
+name = "BBR 网络加速优化"
+description = "安装并配置 TCP 调优工具，提供 'bbr' 快捷指令"
+command = "bash ./shell_scripts/custom/bbr_tune.sh"
