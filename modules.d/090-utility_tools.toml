@@ -6,8 +6,6 @@ hostname_management = "bash <(curl -sL raw.githubusercontent.com/NodeSeekDev/Nod
 ports_management = "bash <(curl -sL raw.githubusercontent.com/NodeSeekDev/NodeScriptKit/refs/heads/main/shell_scripts/utility_tools/ports_management.sh)"
 auto_mount_disk = "bash <(curl -sL raw.githubusercontent.com/NodeSeekDev/NodeScriptKit/refs/heads/main/shell_scripts/utility_tools/auto_mount_disk.sh)"
 geek_prompt = "bash <(curl -sL raw.githubusercontent.com/NodeSeekDev/NodeScriptKit/refs/heads/main/shell_scripts/utility_tools/geek_prompt.sh)"
-# ⬇️ 新增加的 BBR 脚本路径
-bbr_tune = "bash /etc/nsk/shell_scripts/custom/bbr_tune.sh"
 
 [[menus]]
 id = "utility_tools"
@@ -19,7 +17,6 @@ sub_menus = [
   'hostname_management',
   'auto_mount_disk',
   'geek_prompt',
-  'bbr_tune', # ⬇️ 新增加的子菜单项
 ]
 
 [[menus]]
@@ -51,9 +48,3 @@ script = "auto_mount_disk"
 id = "geek_prompt"
 title = "Geek Prompt 美化终端"
 script = "geek_prompt"
-
-# ⬇️ 新增加的 BBR 菜单按钮配置
-[[menus]]
-id = "bbr_tune"
-title = "BBR 网络加速优化"
-script = "bbr_tune"
